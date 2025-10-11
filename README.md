@@ -1,3 +1,3 @@
 # nomina_beta
 
-agradecimientos a znapheds y a chuy
+agradecimientos a znapheds y a lolo
