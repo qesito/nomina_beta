@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 
-# autores: qesito, emilianosdev, vtorrres
+# CREADO POR 
+#   ____    ___________ ______________ 
+#  / __ \  / ____/ ___//  _/_  __/ __ \
+# / / / / / __/  \__ \ / /  / / / / / /
+#/ /_/ / / /___ ___/ // /  / / / /_/ / 
+#\___\_\/_____//____/___/ /_/  \____/  
+# emilianosdev™, vtorres© 
+
 
 import numpy as np
 
