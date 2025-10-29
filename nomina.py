@@ -46,7 +46,7 @@ inx = {
     "no_trab": 0, "nombre": 1, "dpto": 2, "tipo": 3, 
     "dias": 4, "pago_dia": 5, "h_extra": 6, "pago_h_extra": 7, "bono_prod": 8 ,"sueldo_bruto": 9, 
     }
-
+#funcion mostrar menu, muestra el menu y retorna string de la seleccion
 def mostrar_menu_principal():
     print("\n--- Menú ---")
     print("1.- Modificar información")
@@ -58,7 +58,10 @@ def mostrar_menu_principal():
     print("7.- Salir")
     opcion = input("Seleccione una opción: ")
     return opcion
-
+#funcion encontrar empleado, enumerate: itera(obtien indice y datos), 
+# compara el elemento con el que se busca 
+# si lo encuentra retorna una tupla con el indice y los tados del empleado 
+# si no lo encuentra retorna none
 def encontrar_empleado(num_trabajador):
     for i, empleado in enumerate(nomina):
         if empleado[0] == num_trabajador:
@@ -80,14 +83,14 @@ def mostrar_tabla_empleados():
         print(f"{empleado[inx['no_trab']]:<8} {empleado[inx['nombre']]:<25} {empleado[inx['dpto']]:<15} {empleado[inx['tipo']]:<10}")
     
 def menu_cambio():
-    while True:
-        mostrar_tabla_empleados()
+    while True: #bucle principal
+        mostrar_tabla_empleados() # seleccion del empleado
         empleado_cambio = int(input("\nIngresa el número de empleado a cambiar: "))
         empleado_datos = encontrar_empleado(empleado_cambio)
         indice_empleado = empleado_datos[0]
 
         if empleado_datos[1] != None:
-            while True:
+            while True:# bucle interior para modifacion de datos
                 datos_actuales = nomina[indice_empleado]
                 print("\n--- Modificando a:", datos_actuales[inx['nombre']], "---")
                 print(f" 1-No. Trabajador: {datos_actuales[inx['no_trab']]}")
@@ -140,7 +143,7 @@ def menu_cambio():
         
 # 𝑆𝑢𝑒𝑙𝑑𝑜 = 𝐷í𝑎𝑠 𝑇𝑟𝑎𝑏𝑎𝑗𝑎𝑑𝑜𝑠 ∗ 𝑃𝑎𝑔𝑜 𝐷𝑖𝑎𝑟𝑖𝑜 + 𝐻𝑜𝑟𝑎𝑠 𝐸𝑥𝑡𝑟𝑎 ∗ 𝑃𝑎𝑔𝑜 𝑝𝑜𝑟 𝐻𝑜𝑟𝑎 𝐸𝑥𝑡𝑟𝑎 + 𝐵𝑜𝑛𝑜 𝑃𝑟𝑜𝑑𝑢𝑡𝑖𝑣𝑖𝑑𝑎𝑑
 def calcular_sueldos():
-    for i, empleado in enumerate(nomina):
+    for i, empleado in enumerate(nomina):# enumerate trae el indice (i) y los datos 
         sueldo_diario = empleado[inx["dias"]] * empleado[inx["pago_dia"]]
         pago_extra = empleado[inx["h_extra"]] * empleado[inx["pago_h_extra"]]
         sueldo_bruto = sueldo_diario + pago_extra + empleado[inx["bono_prod"]]
@@ -152,14 +155,15 @@ def desplegar_sueldos():
     print("\n--- TABLA DE SUELDOS ---")
     # Imprime encabezados
     print(f"{'No.':<8} {'Nombre':<35} {'Departamento':<15} {'Tipo de Empleado':<15} {'Días trabajados':<8} {'Pago Diario':<10} {'Horas Extra':<10} {'Pago por hora extra':<10} {'Bono Productividad':15} {'Sueldo Bruto':<10}")
-    print("-" * 150)
+    #:< alinea texto a la izquierda
+    print("-" * 150)# multiplica guiones para separar
     
     for empleado in nomina:
         print(f"{empleado[inx['no_trab']]:<8} {empleado[inx['nombre']]:<35} {empleado[inx['dpto']]:<15} {empleado[inx['tipo']]:<15} {empleado[inx['dias']]:<8} {empleado[inx['pago_dia']]:<10} {empleado[inx['h_extra']]:<10} {empleado[inx['pago_h_extra']]:<10} {empleado[inx['bono_prod']]:<15} ${empleado[inx['sueldo_bruto']]:<10,.2f}")
     
 def sueldo_departamento():
     total_dpto = {}
-    for empleado in nomina:
+    for empleado in nomina:# recolecta los datos
         departamento = empleado[inx["dpto"]]
         sueldo = empleado[inx["sueldo_bruto"]]
 
@@ -200,6 +204,7 @@ def sueldos_horasx():
             f"{empleado[inx['sueldo_bruto']]:<11,.2f} |"
             )
         pbase = empleado[inx["dias"]] * empleado[inx["pago_dia"]]
+        #dias por horas y acomula en total_pbase
         total_pbase += pbase
 
         pextra = empleado[inx["h_extra"]] * empleado[inx["pago_h_extra"]]
