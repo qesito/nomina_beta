@@ -8,6 +8,7 @@
 #\___\_\/_____//____/___/ /_/  \____/  
 # emilianosdev™, vtorres© 
 
+import numpy as np
 #chuy presenta eso 
 nomina = [
     [100,"José Pérez Ramos", "Producción", "Obrero", 7, 825, 9, 200, 0, 0],
@@ -112,6 +113,7 @@ def menu_cambio():
                     nomina[indice_empleado][inx['bono_prod']] = nuevo_dato
                 elif cambio == 10:
                     print("Saliendo del menú de cambios...")
+                    nomina.sort()
                     return
                 else:
                     print("Opción inválida")
