@@ -8,7 +8,7 @@
 #\___\_\/_____//____/___/ /_/  \____/  
 # emilianosdev™, vtorres© 
 
-
+#chuy presenta eso 
 nomina = [
     [100,"José Pérez Ramos", "Producción", "Obrero", 7, 825, 9, 200, 0, 0],
     [110,"Pablo Ramírez Ruiz", "Producción", "Obrero", 7, 825, 10, 200, 0, 0],
@@ -41,13 +41,11 @@ cabeceras = [
     "No. de Trabajador", "Nombre", "Departamento", "Tipo de Empleado",
     "Días Trabajados", "Pago Diario", "Horas Extra", "Pago por Hora Extra", "Sueldo Bruto" , "Bono Productividad"
 ]
-
-inx = {
+inx = {#Diccionario 
     "no_trab": 0, "nombre": 1, "dpto": 2, "tipo": 3, 
     "dias": 4, "pago_dia": 5, "h_extra": 6, "pago_h_extra": 7, "bono_prod": 8 ,"sueldo_bruto": 9, 
     }
-#funcion mostrar menu, muestra el menu y retorna string de la seleccion
-def mostrar_menu_principal():
+def mostrar_menu_principal():#funcion mostrar menu, muestra el menu y retorna string de la seleccion
     print("\n--- Menú ---")
     print("1.- Modificar información")
     print("2.- Calcula sueldos")
@@ -62,26 +60,6 @@ def mostrar_menu_principal():
 # compara el elemento con el que se busca 
 # si lo encuentra retorna una tupla con el indice y los tados del empleado 
 # si no lo encuentra retorna none
-def encontrar_empleado(num_trabajador):
-    for i, empleado in enumerate(nomina):
-        if empleado[0] == num_trabajador:
-            return i, empleado
-    return None,None
-
-
-#def mostrar_tabla_empleados():
-
-def mostrar_tabla_empleados():
-    """Muestra la nómina básica con formato de texto fijo."""
-    print("\n--- LISTA DE TRABAJADORES ---")
-    # Imprime encabezados
-    print(f"{'No.':<8} {'Nombre':<25} {'Departamento':<15} {'Tipo de Empleado':<10}")
-    print("-" * 65)
-    
-    for empleado in nomina:
-        # Imprime datos clave para selección
-        print(f"{empleado[inx['no_trab']]:<8} {empleado[inx['nombre']]:<25} {empleado[inx['dpto']]:<15} {empleado[inx['tipo']]:<10}")
-    
 def menu_cambio():
     while True: #bucle principal
         mostrar_tabla_empleados() # seleccion del empleado
@@ -139,9 +117,11 @@ def menu_cambio():
                     print("Opción inválida")
         else:
             print(f"\nEl número de trabajador {empleado_cambio} no existe. Intente de nuevo.")
-            
-        
-# 𝑆𝑢𝑒𝑙𝑑𝑜 = 𝐷í𝑎𝑠 𝑇𝑟𝑎𝑏𝑎𝑗𝑎𝑑𝑜𝑠 ∗ 𝑃𝑎𝑔𝑜 𝐷𝑖𝑎𝑟𝑖𝑜 + 𝐻𝑜𝑟𝑎𝑠 𝐸𝑥𝑡𝑟𝑎 ∗ 𝑃𝑎𝑔𝑜 𝑝𝑜𝑟 𝐻𝑜𝑟𝑎 𝐸𝑥𝑡𝑟𝑎 + 𝐵𝑜𝑛𝑜 𝑃𝑟𝑜𝑑𝑢𝑡𝑖𝑣𝑖𝑑𝑎𝑑
+def encontrar_empleado(num_trabajador):
+    for i, empleado in enumerate(nomina):
+        if empleado[0] == num_trabajador:
+            return i, empleado
+    return None,None
 def calcular_sueldos():
     for i, empleado in enumerate(nomina):# enumerate trae el indice (i) y los datos 
         sueldo_diario = empleado[inx["dias"]] * empleado[inx["pago_dia"]]
@@ -149,8 +129,6 @@ def calcular_sueldos():
         sueldo_bruto = sueldo_diario + pago_extra + empleado[inx["bono_prod"]]
         
         nomina[i][inx["sueldo_bruto"]] = round(sueldo_bruto, 2)
-            
-
 def desplegar_sueldos():
     print("\n--- TABLA DE SUELDOS ---")
     # Imprime encabezados
@@ -160,7 +138,6 @@ def desplegar_sueldos():
     
     for empleado in nomina:
         print(f"{empleado[inx['no_trab']]:<8} {empleado[inx['nombre']]:<35} {empleado[inx['dpto']]:<15} {empleado[inx['tipo']]:<15} {empleado[inx['dias']]:<8} {empleado[inx['pago_dia']]:<10} {empleado[inx['h_extra']]:<10} {empleado[inx['pago_h_extra']]:<10} {empleado[inx['bono_prod']]:<15} ${empleado[inx['sueldo_bruto']]:<10,.2f}")
-    
 def sueldo_departamento():
     total_dpto = {}
     for empleado in nomina:# recolecta los datos
@@ -175,8 +152,6 @@ def sueldo_departamento():
     print("\n--- Sueldos totales por departamento---")
     for dpto, total in total_dpto.items(): #.items devuelve pares clave-valor de un diccionario
         print(f"{dpto:<15}: ${total:,.2f}") #<- dpto:<15 va a alinear, :$ signo de pesos, ,.2f dos decimales
-
-
 def sueldo_empleado():
     total_tipo = {}
     for empleado in nomina:
@@ -191,7 +166,6 @@ def sueldo_empleado():
     print("\n--- Sueldos por tipo de empleado---")
     for tipo, total in total_tipo.items(): 
         print(f"{tipo:<15}: ${total:,.2f}") 
-
 def sueldos_horasx():
     total_pbase = 0.0
     total_pextra = 0.0
@@ -215,6 +189,41 @@ def sueldos_horasx():
     
     
     print(f"{'Total horas extra':<15} | ${total_pextra:<9,.2f}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+#def mostrar_tabla_empleados():
+
+def mostrar_tabla_empleados():
+    """Muestra la nómina básica con formato de texto fijo."""
+    print("\n--- LISTA DE TRABAJADORES ---")
+    # Imprime encabezados
+    print(f"{'No.':<8} {'Nombre':<20} {'Departamento':<15} {'Tipo de Empleado':<10}")
+    print("-" * 50)
+    
+    for empleado in nomina:
+        # Imprime datos clave para selección
+        print(f"{empleado[inx['no_trab']]:<8} {empleado[inx['nombre']]:<25} {empleado[inx['dpto']]:<15} {empleado[inx['tipo']]:<10}")
+    
+
+# 𝑆𝑢𝑒𝑙𝑑𝑜 = 𝐷í𝑎𝑠 𝑇𝑟𝑎𝑏𝑎𝑗𝑎𝑑𝑜𝑠 ∗ 𝑃𝑎𝑔𝑜 𝐷𝑖𝑎𝑟𝑖𝑜 + 𝐻𝑜𝑟𝑎𝑠 𝐸𝑥𝑡𝑟𝑎 ∗ 𝑃𝑎𝑔𝑜 𝑝𝑜𝑟 𝐻𝑜𝑟𝑎 𝐸𝑥𝑡𝑟𝑎 + 𝐵𝑜𝑛𝑜 𝑃𝑟𝑜𝑑𝑢𝑡𝑖𝑣𝑖𝑑𝑎𝑑
+
+
+
+
+
+
+
 
 
 #funcion principal de ejecucion :D
