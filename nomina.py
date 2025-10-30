@@ -1,14 +1,3 @@
-#!/usr/bin/env python3
-
-# CREADO POR 
-#   ____    ___________ ______________ 
-#  / __ \  / ____/ ___//  _/_  __/ __ \
-# / / / / / __/  \__ \ / /  / / / / / /
-#/ /_/ / / /___ ___/ // /  / / / /_/ / 
-#\___\_\/_____//____/___/ /_/  \____/  
-# emilianosdev™, vtorres© 
-
-
 nomina = [
     [100,"José Pérez Ramos", "Producción", "Obrero", 7, 825, 9, 200, 0, 0],
     [110,"Pablo Ramírez Ruiz", "Producción", "Obrero", 7, 825, 10, 200, 0, 0],
@@ -191,7 +180,7 @@ def sueldo_empleado():
 def sueldos_horasx():
     total_pbase = 0.0
     total_pextra = 0.0
-    pbono = 0
+    total_pbono = 0.0
 
     for empleado in nomina:
         pbase = empleado[inx["dias"]] * empleado[inx["pago_dia"]]
@@ -199,18 +188,15 @@ def sueldos_horasx():
 
         pextra = empleado[inx["h_extra"]] * empleado[inx["pago_h_extra"]]
         total_pextra += pextra
-        pbono = empleado[inx["bono_prod"]]
-        print(pbono)
-        pbono += pbono
+        bono_act = empleado[inx["bono_prod"]]
+        total_pbono += bono_act
+        totalgral = total_pextra + total_pbase + total_pbono
     
     print(f"{'Total sueldos':<15} | ${total_pbase:<9,.2f}")
-    
-    
     print(f"{'Total horas extra':<15} | ${total_pextra:<9,.2f}")
-
-    print(f"{'Total bonos de productividad':<15} | ${pbono:<9,.2f}")
-
-    print(f"{'Total':<15} |${total_pextra + total_pbase + pbono:<9,.2f}")
+    print(f"{'Total bonos de productividad':<15} | ${total_pbono:<9,.2f}")
+    print(f"{'Total':<15} |${totalgral:<9,.2f}")
+    
 #funcion principal de ejecucion 
 
 def main():
