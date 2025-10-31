@@ -62,91 +62,87 @@ def mostrar_tabla_empleados():#emiliano
     for empleado in nomina:
         print(f"{empleado[inx['no_trab']]:<8} {empleado[inx['nombre']]:<35}")
     
-def menu_cambio():#fer
+def pedir_numero_isdigit(mensaje):#fer
     while True:
-        mostrar_tabla_empleados()
-        empleado_cambio = input("\nIngresa el número de empleado a cambiar: ")
-        if empleado_cambio.isdigit():
-            empleado_datos = encontrar_empleado(int(empleado_cambio))
-            indice_empleado = empleado_datos[0]
-            if empleado_datos[1] is not None:
-                while True:
-                    datos_actuales = nomina[indice_empleado]
-                    print("\n--- Modificando a:", datos_actuales[inx['nombre']], "---")
-                    print(f" 1-No. Trabajador: {datos_actuales[inx['no_trab']]}")
-                    print(f" 2-Nombre: {datos_actuales[inx['nombre']]}")
-                    print(f" 3-Departamento: {datos_actuales[inx['dpto']]}")
-                    print(f" 4-Tipo de Empleado: {datos_actuales[inx['tipo']]}")
-                    print(f" 5-Días Trabajados: {datos_actuales[inx['dias']]}")
-                    print(f" 6-Pago Diario: {datos_actuales[inx['pago_dia']]}")
-                    print(f" 7-Horas Extra: {datos_actuales[inx['h_extra']]}")
-                    print(f" 8-Pago por Hora Extra: {datos_actuales[inx['pago_h_extra']]}")
-                    print(f" 9-Bono productividad: {datos_actuales[inx['bono_prod']]}")
-                    print("\n 10-Salir")
-                    cambio = input("\nIngresa el numero del dato a cambiar: ")
-                    
-                    if cambio == "1":
-                        nuevo_dato = input("\nIngrese el nuevo numero del trabajador: ")
-                        if nuevo_dato.isdigit():
-                            nomina[indice_empleado][inx['no_trab']] = int(nuevo_dato)
-                        else:
-                            print("El número de trabajador debe ser un valor numérico.")
-
-                    elif cambio == "2":
-                        nuevo_dato = input("Ingrese el nuevo nombre del trabajador: ")
-                        nomina[indice_empleado][inx['nombre']] = nuevo_dato
-                    elif cambio == "3":
-                        nuevo_dato = input("Ingrese el nuevo departamento del trabajador:  ")
-                        nomina[indice_empleado][inx['dpto']] = nuevo_dato
-                    elif cambio == "4":
-                        nuevo_dato = input("Ingrese el nuevo tipo de empleado: ")
-                        nomina[indice_empleado][inx['tipo']] = nuevo_dato
-
-                    elif cambio == "5":
-                        nuevo_dato = input("Ingrese los nuevos dias trabajados: ")
-                        if nuevo_dato.isdigit():
-                            nomina[indice_empleado][inx['dias']] = int(nuevo_dato)
-                        else:
-                            print("Los días trabajados deben ser un valor numérico.")
-
-                    elif cambio == "6":
-                        nuevo_dato  = input("Ingrese el nuevo pago diario: ")
-                        if nuevo_dato.isdigit():
-                            nomina[indice_empleado][inx['pago_dia']] = int(nuevo_dato)
-                        else:
-                            print("El pago diario debe ser un valor numerico.")
-
-                    elif cambio == "7": 
-                        nuevo_dato = input("Ingrese las nuevas horas extras: ")
-                        if nuevo_dato.isdigit():
-                            nomina[indice_empleado][inx['h_extra']] = int(nuevo_dato)
-                        else:
-                            print("Las horas extra deben ser un valor numérico.")
-                            
-                    elif cambio == "8": 
-                        nuevo_dato = input("Ingrese el nuevo pago por hora extra: ")
-                        if nuevo_dato.isdigit():
-                            nomina[indice_empleado][inx['pago_h_extra']] = int(nuevo_dato)
-                        else:
-                            print("El pago por hora extra debe ser un valor numérico.")
-
-                    elif cambio == "9": 
-                        nuevo_dato = input("Ingrese el nuevo bono productividad: ")
-                        if nuevo_dato.isdigit():
-                            nomina[indice_empleado][inx['bono_prod']] = int(nuevo_dato)
-                        else:
-                            print("El bono de productividad debe ser un valor numérico.")
-
-                    elif cambio == "10":
-                        print("Saliendo del menú de cambios...")
-                        nomina.sort()
-                        return
-                    else:
-                        print("Opción inválida")
-            else:
-                print(f"\nEl número de trabajador {empleado_cambio} no existe. Intente de nuevo.")
+        valor_str = input(mensaje)
+        if valor_str.isdigit():
+            return int(valor_str)
         else:
-            print("Entrada inválida. Por favor, ingrese un número válido.")    
+            print("Error: Debe ingresar un valor numérico positivo.")
+
+def menu_cambio():#fer
+    while True: 
+        mostrar_tabla_empleados()
+        
+        empleado_cambio = pedir_numero_isdigit("\nIngresa el número de empleado a cambiar: ")
+
+        empleado_datos = encontrar_empleado(empleado_cambio)
+        
+        if empleado_datos[1] is not None:
+            
+            indice_empleado = empleado_datos[0] 
+            
+            while True:
+                datos_actuales = nomina[indice_empleado]
+                
+                print("\n--- Modificando a:", datos_actuales[inx['nombre']], "---")
+                print(f" 1-No. Trabajador: {datos_actuales[inx['no_trab']]}")
+                print(f" 2-Nombre: {datos_actuales[inx['nombre']]}")
+                print(f" 3-Departamento: {datos_actuales[inx['dpto']]}")
+                print(f" 4-Tipo de Empleado: {datos_actuales[inx['tipo']]}")
+                print(f" 5-Días Trabajados: {datos_actuales[inx['dias']]}")
+                print(f" 6-Pago Diario: {datos_actuales[inx['pago_dia']]}")
+                print(f" 7-Horas Extra: {datos_actuales[inx['h_extra']]}")
+                print(f" 8-Pago por Hora Extra: {datos_actuales[inx['pago_h_extra']]}")
+                print(f" 9-Bono productividad: {datos_actuales[inx['bono_prod']]}")
+                print("\n 10-Salir")
+                
+                cambio = pedir_numero_isdigit("\nIngresa el numero del dato a cambiar: ")
+                
+                if cambio == 1:
+                    nuevo_dato = pedir_numero_isdigit("\nIngrese el nuevo numero del trabajador: ")
+                    nomina[indice_empleado][inx['no_trab']] = nuevo_dato
+                
+                elif cambio == 2:
+                    nuevo_dato = input("Ingrese el nuevo nombre del trabajador: ")
+                    nomina[indice_empleado][inx['nombre']] = nuevo_dato
+                
+                elif cambio == 3:
+                    nuevo_dato = input("Ingrese el nuevo departamento del trabajador:  ")
+                    nomina[indice_empleado][inx['dpto']] = nuevo_dato
+                
+                elif cambio == 4:
+                    nuevo_dato = input("Ingrese el nuevo tipo de empleado: ")
+                    nomina[indice_empleado][inx['tipo']] = nuevo_dato
+                
+                elif cambio == 5:
+                    nuevo_dato = pedir_numero_isdigit("Ingrese los nuevos dias trabajados: ")
+                    nomina[indice_empleado][inx['dias']] = nuevo_dato
+                
+                elif cambio == 6:
+                    nuevo_dato = pedir_numero_isdigit("Ingrese el nuevo pago diario: ")
+                    nomina[indice_empleado][inx['pago_dia']] = nuevo_dato
+                
+                elif cambio == 7: 
+                    nuevo_dato = pedir_numero_isdigit("Ingrese las nuevas horas extras: ")
+                    nomina[indice_empleado][inx['h_extra']] = nuevo_dato
+                
+                elif cambio == 8: 
+                    nuevo_dato = pedir_numero_isdigit("Ingrese el nuevo pago por hora extra: ")
+                    nomina[indice_empleado][inx['pago_h_extra']] = nuevo_dato
+                
+                elif cambio == 9: 
+                    nuevo_dato = pedir_numero_isdigit("Ingrese el nuevo bono productividad: ")
+                    nomina[indice_empleado][inx['bono_prod']] = nuevo_dato
+
+                elif cambio == 10:
+                    print("Guardando cambios y saliendo...")
+                    nomina.sort() 
+                    return 
+                else:
+                    print("Opción inválida. Intente de nuevo (1-10).")
+        else:
+            print(f"\nEl número de trabajador {empleado_cambio} no existe. Intente de nuevo.")
         
 # 𝑆𝑢𝑒𝑙𝑑𝑜 = 𝐷í𝑎𝑠 𝑇𝑟𝑎𝑏𝑎𝑗𝑎𝑑𝑜𝑠 ∗ 𝑃𝑎𝑔𝑜 𝐷𝑖𝑎𝑟𝑖𝑜 + 𝐻𝑜𝑟𝑎𝑠 𝐸𝑥𝑡𝑟𝑎 ∗ 𝑃𝑎𝑔𝑜 𝑝𝑜𝑟 𝐻𝑜𝑟𝑎 𝐸𝑥𝑡𝑟𝑎 + 𝐵𝑜𝑛𝑜 𝑃𝑟𝑜𝑑𝑢𝑡𝑖𝑣𝑖𝑑𝑎𝑑
 def calcular_sueldos():#emiliano
