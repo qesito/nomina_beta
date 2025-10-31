@@ -152,15 +152,46 @@ def calcular_sueldos():#emiliano
         nomina[i][inx["sueldo_bruto"]] = round(sueldo_bruto, 2)
             
 
-def desplegar_sueldos():#emiliano
+def desplegar_sueldos():#emiliano 
+    W_NO = 8
+    W_NOM = 35
+    W_DPTO = 15
+    W_TIPO = 15
+    W_DIAS = 8 
+    W_PAGO = 10  
+    W_HEX = 10 
+    W_PAGO_HEX = 10 
+    W_BONO = 15 
+    W_BRUTO = 12 
+    
+    encabezado = (
+        f"{'No.':<{W_NO}} {'Nombre':<{W_NOM}} {'Departamento':<{W_DPTO}} {'Tipo Empleado':<{W_TIPO}} "
+        f"{'Días Trab':>{W_DIAS}} {'P. Diario':>{W_PAGO}} {'Horas Ex':>{W_HEX}} {'P. H.Ex':>{W_PAGO_HEX}} "
+        f"{'Bono Prod.':>{W_BONO}} {'Sueldo Bruto':>{W_BRUTO}}"
+    )
+    
+    ancho_total = len(encabezado)
+    separador = "-" * ancho_total
+
     print("\n--- TABLA DE SUELDOS ---")
-    # Imprime encabezados
-    print(f"{'No.':<8} {'Nombre':<35} {'Departamento':<15} {'Tipo de Empleado':<15} {'Días trabajados':<8} {'Pago Diario':<10} {'Horas Extra':<10} {'Pago por hora extra':<10} {'Bono Productividad':15} {'Sueldo Bruto':<10}")
-    print("-" * 150)
+    print(encabezado)
+    print(separador)
     
     for empleado in nomina:
-        print(f"{empleado[inx['no_trab']]:<8} {empleado[inx['nombre']]:<35} {empleado[inx['dpto']]:<15} {empleado[inx['tipo']]:<15} {empleado[inx['dias']]:<8} {empleado[inx['pago_dia']]:<10} {empleado[inx['h_extra']]:<10} {empleado[inx['pago_h_extra']]:<10} {empleado[inx['bono_prod']]:<15} ${empleado[inx['sueldo_bruto']]:<10,.2f}")
-    
+        print(
+            f"{empleado[inx['no_trab']]:<{W_NO}} "
+            f"{empleado[inx['nombre']]:<{W_NOM}} "
+            f"{empleado[inx['dpto']]:<{W_DPTO}} "
+            f"{empleado[inx['tipo']]:<{W_TIPO}} "
+            f"{empleado[inx['dias']]:>{W_DIAS}} "
+            f"${empleado[inx['pago_dia']]:>{W_PAGO-1},.2f} " 
+            f"{empleado[inx['h_extra']]:>{W_HEX}} "
+            f"${empleado[inx['pago_h_extra']]:>{W_PAGO_HEX-1},.2f} "
+            f"${empleado[inx['bono_prod']]:>{W_BONO-1},.2f} "
+            f"${empleado[inx['sueldo_bruto']]:>{W_BRUTO-1},.2f}"
+        )
+    print(separador)
+
 def sueldo_departamento():#rita
     total_dpto = {}
     for empleado in nomina:
