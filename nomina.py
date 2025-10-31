@@ -81,10 +81,8 @@ def menu_cambio():#fer
         if empleado_datos[1] is not None:
             
             indice_empleado = empleado_datos[0] 
-            
             while True:
                 datos_actuales = nomina[indice_empleado]
-                
                 print("\n--- Modificando a:", datos_actuales[inx['nombre']], "---")
                 print(f" 1-No. Trabajador: {datos_actuales[inx['no_trab']]}")
                 print(f" 2-Nombre: {datos_actuales[inx['nombre']]}")
@@ -108,11 +106,11 @@ def menu_cambio():#fer
                     nomina[indice_empleado][inx['nombre']] = nuevo_dato
                 
                 elif cambio == 3:
-                    nuevo_dato = input("Ingrese el nuevo departamento del trabajador:  ")
+                    nuevo_dato = input("Ingrese el nuevo departamento del trabajador (Producción, Ventas, Compras, Recursos Humanos, Dirección):  ")
                     nomina[indice_empleado][inx['dpto']] = nuevo_dato
                 
                 elif cambio == 4:
-                    nuevo_dato = input("Ingrese el nuevo tipo de empleado: ")
+                    nuevo_dato = input("Ingrese el nuevo tipo de empleado (Empleado, Obrero, Directivo): ")
                     nomina[indice_empleado][inx['tipo']] = nuevo_dato
                 
                 elif cambio == 5:
