@@ -35,8 +35,7 @@ inx = {
     "no_trab": 0, "nombre": 1, "dpto": 2, "tipo": 3, 
     "dias": 4, "pago_dia": 5, "h_extra": 6, "pago_h_extra": 7, "bono_prod": 8 ,"sueldo_bruto": 9, 
     }
-
-def mostrar_menu_principal():
+def mostrar_menu_principal(): #chuy
     print("\n--- Menú ---")
     print("1.- Modificar información")
     print("2.- Calcula sueldos")
@@ -48,87 +47,109 @@ def mostrar_menu_principal():
     opcion = input("Seleccione una opción: ")
     return opcion
 
-def encontrar_empleado(num_trabajador):
+def encontrar_empleado(num_trabajador):#fer
     for i, empleado in enumerate(nomina):
         if empleado[0] == num_trabajador:
             return i, empleado
     return None,None
-
-
 #def mostrar_tabla_empleados():
-
-def mostrar_tabla_empleados():
+def mostrar_tabla_empleados():#emiliano
     """Muestra la nómina básica con formato de texto fijo."""
     print("\n--- LISTA DE TRABAJADORES ---")
     # Imprime encabezados
-    print(f"{'No.':<8} {'Nombre':<25} {'Departamento':<15} {'Tipo de Empleado':<10}")
-    print("-" * 65)
+    print(f"{'No.':<8} {'Nombre':<35}")
     
     for empleado in nomina:
-        # Imprime datos clave para selección
-        print(f"{empleado[inx['no_trab']]:<8} {empleado[inx['nombre']]:<25} {empleado[inx['dpto']]:<15} {empleado[inx['tipo']]:<10}")
+        print(f"{empleado[inx['no_trab']]:<8} {empleado[inx['nombre']]:<35}")
     
-def menu_cambio():
+def menu_cambio():#fer
     while True:
         mostrar_tabla_empleados()
-        empleado_cambio = int(input("\nIngresa el número de empleado a cambiar: "))
-        empleado_datos = encontrar_empleado(empleado_cambio)
-        indice_empleado = empleado_datos[0]
+        empleado_cambio = input("\nIngresa el número de empleado a cambiar: ")
+        if empleado_cambio.isdigit():
+            empleado_datos = encontrar_empleado(int(empleado_cambio))
+            indice_empleado = empleado_datos[0]
+            if empleado_datos[1] is not None:
+                while True:
+                    datos_actuales = nomina[indice_empleado]
+                    print("\n--- Modificando a:", datos_actuales[inx['nombre']], "---")
+                    print(f" 1-No. Trabajador: {datos_actuales[inx['no_trab']]}")
+                    print(f" 2-Nombre: {datos_actuales[inx['nombre']]}")
+                    print(f" 3-Departamento: {datos_actuales[inx['dpto']]}")
+                    print(f" 4-Tipo de Empleado: {datos_actuales[inx['tipo']]}")
+                    print(f" 5-Días Trabajados: {datos_actuales[inx['dias']]}")
+                    print(f" 6-Pago Diario: {datos_actuales[inx['pago_dia']]}")
+                    print(f" 7-Horas Extra: {datos_actuales[inx['h_extra']]}")
+                    print(f" 8-Pago por Hora Extra: {datos_actuales[inx['pago_h_extra']]}")
+                    print(f" 9-Bono productividad: {datos_actuales[inx['bono_prod']]}")
+                    print("\n 10-Salir")
+                    cambio = input("\nIngresa el numero del dato a cambiar: ")
+                    
+                    if cambio == "1":
+                        nuevo_dato = input("\nIngrese el nuevo numero del trabajador: ")
+                        if nuevo_dato.isdigit():
+                            nomina[indice_empleado][inx['no_trab']] = int(nuevo_dato)
+                        else:
+                            print("El número de trabajador debe ser un valor numérico.")
 
-        if empleado_datos[1] != None:
-            while True:
-                datos_actuales = nomina[indice_empleado]
-                print("\n--- Modificando a:", datos_actuales[inx['nombre']], "---")
-                print(f" 1-No. Trabajador: {datos_actuales[inx['no_trab']]}")
-                print(f" 2-Nombre: {datos_actuales[inx['nombre']]}")
-                print(f" 3-Departamento: {datos_actuales[inx['dpto']]}")
-                print(f" 4-Tipo de Empleado: {datos_actuales[inx['tipo']]}")
-                print(f" 5-Días Trabajados: {datos_actuales[inx['dias']]}")
-                print(f" 6-Pago Diario: {datos_actuales[inx['pago_dia']]}")
-                print(f" 7-Horas Extra: {datos_actuales[inx['h_extra']]}")
-                print(f" 8-Pago por Hora Extra: {datos_actuales[inx['pago_h_extra']]}")
-                print(f" 9-Bono productividad: {datos_actuales[inx['bono_prod']]}")
-                print("\n 10-Salir")
-                cambio = int(input("\nIngresa el numero del dato a cambiar: "))
-                
-                if cambio == 1:
-                    nuevo_dato = int(input("\nIngrese el nuevo numero del trabajador: "))
-                    nomina[indice_empleado][inx['no_trab']] = nuevo_dato
-                elif cambio == 2:
-                    nuevo_dato = input("Ingrese el nuevo nombre del trabajador: ")
-                    nomina[indice_empleado][inx['nombre']] = nuevo_dato
-                elif cambio == 3:
-                    nuevo_dato = input("Ingrese el nuevo departamento del trabajador:  ")
-                    nomina[indice_empleado][inx['dpto']] = nuevo_dato
-                elif cambio == 4:
-                    nuevo_dato = input("Ingrese el nuevo tipo de empleado: ")
-                    nomina[indice_empleado][inx['tipo']] = nuevo_dato
-                elif cambio == 5:
-                    nuevo_dato = int(input("Ingrese los nuevos dias trabajados: "))
-                    nomina[indice_empleado][inx['dias']] = nuevo_dato
-                elif cambio == 6:
-                    nuevo_dato  = int(input("Ingrese el nuevo pago diario: "))
-                    nomina[indice_empleado][inx['pago_dia']] = nuevo_dato
-                elif cambio == 7: 
-                    nuevo_dato = int(input("Ingrese las nuevas horas extras: "))
-                    nomina[indice_empleado][inx['h_extra']] = nuevo_dato
-                elif cambio == 8: 
-                    nuevo_dato = int(input("Ingrese el nuevo pago por hora extra: "))
-                    nomina[indice_empleado][inx['pago_h_extra']] = nuevo_dato
-                elif cambio == 9: 
-                    nuevo_dato = int(input("Ingrese el nuevo bono productividad: "))
-                    nomina[indice_empleado][inx['bono_prod']] = nuevo_dato
-                elif cambio == 10:
-                    print("Saliendo del menú de cambios...")
-                    return
-                else:
-                    print("Opción inválida")
+                    elif cambio == "2":
+                        nuevo_dato = input("Ingrese el nuevo nombre del trabajador: ")
+                        nomina[indice_empleado][inx['nombre']] = nuevo_dato
+                    elif cambio == "3":
+                        nuevo_dato = input("Ingrese el nuevo departamento del trabajador:  ")
+                        nomina[indice_empleado][inx['dpto']] = nuevo_dato
+                    elif cambio == "4":
+                        nuevo_dato = input("Ingrese el nuevo tipo de empleado: ")
+                        nomina[indice_empleado][inx['tipo']] = nuevo_dato
+
+                    elif cambio == "5":
+                        nuevo_dato = input("Ingrese los nuevos dias trabajados: ")
+                        if nuevo_dato.isdigit():
+                            nomina[indice_empleado][inx['dias']] = int(nuevo_dato)
+                        else:
+                            print("Los días trabajados deben ser un valor numérico.")
+
+                    elif cambio == "6":
+                        nuevo_dato  = input("Ingrese el nuevo pago diario: ")
+                        if nuevo_dato.isdigit():
+                            nomina[indice_empleado][inx['pago_dia']] = int(nuevo_dato)
+                        else:
+                            print("El pago diario debe ser un valor numerico.")
+
+                    elif cambio == "7": 
+                        nuevo_dato = input("Ingrese las nuevas horas extras: ")
+                        if nuevo_dato.isdigit():
+                            nomina[indice_empleado][inx['h_extra']] = int(nuevo_dato)
+                        else:
+                            print("Las horas extra deben ser un valor numérico.")
+                            
+                    elif cambio == "8": 
+                        nuevo_dato = input("Ingrese el nuevo pago por hora extra: ")
+                        if nuevo_dato.isdigit():
+                            nomina[indice_empleado][inx['pago_h_extra']] = int(nuevo_dato)
+                        else:
+                            print("El pago por hora extra debe ser un valor numérico.")
+
+                    elif cambio == "9": 
+                        nuevo_dato = input("Ingrese el nuevo bono productividad: ")
+                        if nuevo_dato.isdigit():
+                            nomina[indice_empleado][inx['bono_prod']] = int(nuevo_dato)
+                        else:
+                            print("El bono de productividad debe ser un valor numérico.")
+
+                    elif cambio == "10":
+                        print("Saliendo del menú de cambios...")
+                        nomina.sort()
+                        return
+                    else:
+                        print("Opción inválida")
+            else:
+                print(f"\nEl número de trabajador {empleado_cambio} no existe. Intente de nuevo.")
         else:
-            print(f"\nEl número de trabajador {empleado_cambio} no existe. Intente de nuevo.")
-            
+            print("Entrada inválida. Por favor, ingrese un número válido.")    
         
 # 𝑆𝑢𝑒𝑙𝑑𝑜 = 𝐷í𝑎𝑠 𝑇𝑟𝑎𝑏𝑎𝑗𝑎𝑑𝑜𝑠 ∗ 𝑃𝑎𝑔𝑜 𝐷𝑖𝑎𝑟𝑖𝑜 + 𝐻𝑜𝑟𝑎𝑠 𝐸𝑥𝑡𝑟𝑎 ∗ 𝑃𝑎𝑔𝑜 𝑝𝑜𝑟 𝐻𝑜𝑟𝑎 𝐸𝑥𝑡𝑟𝑎 + 𝐵𝑜𝑛𝑜 𝑃𝑟𝑜𝑑𝑢𝑡𝑖𝑣𝑖𝑑𝑎𝑑
-def calcular_sueldos():
+def calcular_sueldos():#emiliano
     for i, empleado in enumerate(nomina):
         sueldo_diario = empleado[inx["dias"]] * empleado[inx["pago_dia"]]
         pago_extra = empleado[inx["h_extra"]] * empleado[inx["pago_h_extra"]]
@@ -137,7 +158,7 @@ def calcular_sueldos():
         nomina[i][inx["sueldo_bruto"]] = round(sueldo_bruto, 2)
             
 
-def desplegar_sueldos():
+def desplegar_sueldos():#emiliano
     print("\n--- TABLA DE SUELDOS ---")
     # Imprime encabezados
     print(f"{'No.':<8} {'Nombre':<35} {'Departamento':<15} {'Tipo de Empleado':<15} {'Días trabajados':<8} {'Pago Diario':<10} {'Horas Extra':<10} {'Pago por hora extra':<10} {'Bono Productividad':15} {'Sueldo Bruto':<10}")
@@ -146,7 +167,7 @@ def desplegar_sueldos():
     for empleado in nomina:
         print(f"{empleado[inx['no_trab']]:<8} {empleado[inx['nombre']]:<35} {empleado[inx['dpto']]:<15} {empleado[inx['tipo']]:<15} {empleado[inx['dias']]:<8} {empleado[inx['pago_dia']]:<10} {empleado[inx['h_extra']]:<10} {empleado[inx['pago_h_extra']]:<10} {empleado[inx['bono_prod']]:<15} ${empleado[inx['sueldo_bruto']]:<10,.2f}")
     
-def sueldo_departamento():
+def sueldo_departamento():#rita
     total_dpto = {}
     for empleado in nomina:
         departamento = empleado[inx["dpto"]]
@@ -162,7 +183,7 @@ def sueldo_departamento():
         print(f"{dpto:<15}: ${total:,.2f}") #<- dpto:<15 va a alinear, :$ signo de pesos, ,.2f dos decimales
 
 
-def sueldo_empleado():
+def sueldo_empleado():#rita
     total_tipo = {}
     for empleado in nomina:
         tipo = empleado[inx["tipo"]]
@@ -177,7 +198,7 @@ def sueldo_empleado():
     for tipo, total in total_tipo.items(): 
         print(f"{tipo:<15}: ${total:,.2f}") 
 
-def sueldos_horasx():
+def sueldos_horasx():#rita
     total_pbase = 0.0
     total_pextra = 0.0
     total_pbono = 0.0
@@ -199,7 +220,7 @@ def sueldos_horasx():
     
 #funcion principal de ejecucion 
 
-def main():
+def main():#fer
     calcular_sueldos()
     while True:
         opcion = mostrar_menu_principal()
@@ -227,5 +248,5 @@ def main():
         else:
             print("Opción no válida. Por favor, seleccione un número del 1 al 7.")
             
-if __name__ == "__main__":
+if __name__ == "__main__":#chuy
     main()
